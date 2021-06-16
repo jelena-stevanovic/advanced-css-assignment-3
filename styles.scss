@@ -1,0 +1,86 @@
+$textcolor: #706e6e;
+$image-background-color: rgb(101, 161, 189);
+$image-height: 110px;
+$card-width: 190px;
+$card-border-radius: 10px;
+$body-margin: 0.5rem;
+$paragraph-margin: 50px 0;
+$paragraph-font-size: 20px;
+$grid-gap: 70px;
+
+@mixin responsive($breakpoint) {
+    @if $breakpoint == sm {
+        @media screen and (min-width: 380px) {
+            @content;
+        }
+    }
+    @if $breakpoint == md {
+        @media screen and (min-width: 600px) {
+            @content;
+        }
+    }
+    @if $breakpoint == lg {
+        @media screen and (min-width: 950px) {
+            @content;
+        }
+    }
+}
+
+body {
+    color: $textcolor;
+    font-family: "Alata", sans-serif;
+    margin: $body-margin;
+}
+
+h1 {
+    font-weight: lighter;
+}
+
+p {
+    font-size: $paragraph-font-size;
+    margin: $paragraph-margin;
+}
+
+.cards-container {
+    display: grid;
+    row-gap: $grid-gap;
+    width: 100%;
+    justify-content: space-between;
+
+    grid-template-columns: repeat(1, 200px);
+    @include responsive(sm) {
+        grid-template-columns: repeat(2, 200px);
+    }
+    @include responsive(md) {
+        grid-template-columns: repeat(3, 200px);
+    }
+    @include responsive(lg) {
+        grid-template-columns: repeat(5, 200px);
+    }
+
+    .card {
+        position: relative;
+        display: inline-block;
+        height: $image-height + 30px;
+        width: $card-width;
+        box-sizing: border-box;
+        border-radius: $card-border-radius;
+        overflow: hidden;
+        box-shadow: 1px 1px 4px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-img {
+        background: {
+            image: url(placeholder-image.png);
+            size: cover;
+            position: center;
+            color: $image-background-color;
+        }
+        height: $image-height;
+    }
+
+    .card-title {
+        text-align: center;
+        line-height: 22px;
+    }
+}
